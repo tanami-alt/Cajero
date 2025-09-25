@@ -46,25 +46,25 @@ namespace CajeroAutomatico
             //        File.AppendAllText(archivoMov, mov.ToString() + Environment.NewLine);
             //    }
 
-            //    public static List<Movimiento> LeerMovimientos(string numeroCuenta)
-            //    {
-            //        var movimientos = new List<Movimiento>();
-            //        string archivoMov = $"movimientos_{numeroCuenta}.txt";
-            //        if (File.Exists(archivoMov))
-            //        {
-            //            var lineas = File.ReadAllLines(archivoMov);
-            //            foreach (var linea in lineas)
-            //            {
-            //                var datos = linea.Split(';');
-            //                movimientos.Add(new Movimiento
-            //                {
-            //                    Fecha = DateTime.Parse(datos[0]),
-            //                    Tipo = datos[1],
-            //                    Valor = decimal.Parse(datos[2])
-            //                });
-            //            }
-            //        }
-            //        return movimientos;
-            //    }
-            //}
+            public static List<Movimiento> LeerMovimientos(string numeroCuenta)
+        {
+            var movimientos = new List<Movimiento>();
+            string archivoMov = $"movimientos_{numeroCuenta}.txt";
+            if (File.Exists(archivoMov))
+            {
+                var lineas = File.ReadAllLines(archivoMov);
+                foreach (var linea in lineas)
+                {
+                    var datos = linea.Split(';');
+                    movimientos.Add(new Movimiento
+                    {
+                        Fecha = DateTime.Parse(datos[0]),
+                        Tipo = datos[1],
+                        Valor = decimal.Parse(datos[2])
+                    });
+                }
+            }
+            return movimientos;
         }
+    }
+}
