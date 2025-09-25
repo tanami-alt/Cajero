@@ -8,63 +8,63 @@ namespace CajeroAutomatico
 {
     internal class ArchivoHelper
     {
-        private static string usuariosFile = "usuarios.txt";
+        private static string usuariosfile = "usuarios.txt";
 
-        public static List<Usuario> LeerUsuarios()
+        public static list<usuario> leerusuarios()
         {
-            var usuarios = new List<Usuario>();
-            if (File.Exists(usuariosFile))
+            var usuarios = new list<usuario>();
+            if (file.exists(usuariosfile))
             {
-                var lineas = File.ReadAllLines(usuariosFile);
+                var lineas = file.readalllines(usuariosfile);
                 foreach (var linea in lineas)
                 {
-                    var datos = linea.Split(';');
-                    usuarios.Add(new Usuario
+                    var datos = linea.split(';');
+                    usuarios.add(new usuario
                     {
-                        NumeroCuenta = datos[0],
-                        Clave = datos[1],
-                        Saldo = decimal.Parse(datos[2])
+                        numerocuenta = datos[0],
+                        clave = datos[1],
+                        saldo = decimal.parse(datos[2])
                     });
                 }
             }
-            return usuarios;
-        }
+            //        return usuarios;
+            //    }
 
-        public static void GuardarUsuarios(List<Usuario> usuarios)
-        {
-            var lineas = new List<string>();
-            foreach (var usuario in usuarios)
-            {
-                lineas.Add($"{usuario.NumeroCuenta};{usuario.Clave};{usuario.Saldo}");
-            }
-            File.WriteAllLines(usuariosFile, lineas);
-        }
+            //    public static void GuardarUsuarios(List<Usuario> usuarios)
+            //    {
+            //        var lineas = new List<string>();
+            //        foreach (var usuario in usuarios)
+            //        {
+            //            lineas.Add($"{usuario.NumeroCuenta};{usuario.Clave};{usuario.Saldo}");
+            //        }
+            //        File.WriteAllLines(usuariosFile, lineas);
+            //    }
 
-        public static void GuardarMovimiento(string numeroCuenta, Movimiento mov)
-        {
-            string archivoMov = $"movimientos_{numeroCuenta}.txt";
-            File.AppendAllText(archivoMov, mov.ToString() + Environment.NewLine);
-        }
+            //    public static void GuardarMovimiento(string numeroCuenta, Movimiento mov)
+            //    {
+            //        string archivoMov = $"movimientos_{numeroCuenta}.txt";
+            //        File.AppendAllText(archivoMov, mov.ToString() + Environment.NewLine);
+            //    }
 
-        public static List<Movimiento> LeerMovimientos(string numeroCuenta)
-        {
-            var movimientos = new List<Movimiento>();
-            string archivoMov = $"movimientos_{numeroCuenta}.txt";
-            if (File.Exists(archivoMov))
-            {
-                var lineas = File.ReadAllLines(archivoMov);
-                foreach (var linea in lineas)
-                {
-                    var datos = linea.Split(';');
-                    movimientos.Add(new Movimiento
-                    {
-                        Fecha = DateTime.Parse(datos[0]),
-                        Tipo = datos[1],
-                        Valor = decimal.Parse(datos[2])
-                    });
-                }
-            }
-            return movimientos;
+            //    public static List<Movimiento> LeerMovimientos(string numeroCuenta)
+            //    {
+            //        var movimientos = new List<Movimiento>();
+            //        string archivoMov = $"movimientos_{numeroCuenta}.txt";
+            //        if (File.Exists(archivoMov))
+            //        {
+            //            var lineas = File.ReadAllLines(archivoMov);
+            //            foreach (var linea in lineas)
+            //            {
+            //                var datos = linea.Split(';');
+            //                movimientos.Add(new Movimiento
+            //                {
+            //                    Fecha = DateTime.Parse(datos[0]),
+            //                    Tipo = datos[1],
+            //                    Valor = decimal.Parse(datos[2])
+            //                });
+            //            }
+            //        }
+            //        return movimientos;
+            //    }
+            //}
         }
-    }
-}
