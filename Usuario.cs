@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace CajeroAutomatico
 {
-    internal class Usuario
+    public class Usuario
     {
+
         public string NumeroCuenta { get; set; }
         public string Clave { get; set; }
         public decimal Saldo { get; set; }
