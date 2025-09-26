@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,45 +8,45 @@ namespace CajeroAutomatico
 {
     internal class ArchivoHelper
     {
-        private static string usuariosfile = "usuarios.txt";
+        private static string usuariosFile = "usuarios.txt";
 
-        public static list<usuario> leerusuarios()
+        public static List<Usuario> LeerUsuarios()
         {
-            var usuarios = new list<usuario>();
-            if (file.exists(usuariosfile))
+            var usuarios = new List<Usuario>();
+            if (File.Exists(usuariosFile))
             {
-                var lineas = file.readalllines(usuariosfile);
+                var lineas = File.ReadAllLines(usuariosFile);
                 foreach (var linea in lineas)
                 {
-                    var datos = linea.split(';');
-                    usuarios.add(new usuario
+                    var datos = linea.Split(';');
+                    usuarios.Add(new Usuario
                     {
-                        numerocuenta = datos[0],
-                        clave = datos[1],
-                        saldo = decimal.parse(datos[2])
+                        NumeroCuenta = datos[0],
+                        Clave = datos[1],
+                        Saldo = decimal.Parse(datos[2])
                     });
                 }
             }
-            //        return usuarios;
-            //    }
+            return usuarios;
+        }
 
-            //    public static void GuardarUsuarios(List<Usuario> usuarios)
-            //    {
-            //        var lineas = new List<string>();
-            //        foreach (var usuario in usuarios)
-            //        {
-            //            lineas.Add($"{usuario.NumeroCuenta};{usuario.Clave};{usuario.Saldo}");
-            //        }
-            //        File.WriteAllLines(usuariosFile, lineas);
-            //    }
+        public static void GuardarUsuarios(List<Usuario> usuarios)
+        {
+            var lineas = new List<string>();
+            foreach (var usuario in usuarios)
+            {
+                lineas.Add($"{usuario.NumeroCuenta};{usuario.Clave};{usuario.Saldo}");
+            }
+            File.WriteAllLines(usuariosFile, lineas);
+        }
 
-            //    public static void GuardarMovimiento(string numeroCuenta, Movimiento mov)
-            //    {
-            //        string archivoMov = $"movimientos_{numeroCuenta}.txt";
-            //        File.AppendAllText(archivoMov, mov.ToString() + Environment.NewLine);
-            //    }
+        public static void GuardarMovimiento(string numeroCuenta, Movimiento mov)
+        {
+            string archivoMov = $"movimientos_{numeroCuenta}.txt";
+            File.AppendAllText(archivoMov, mov.ToString() + Environment.NewLine);
+        }
 
-            public static List<Movimiento> LeerMovimientos(string numeroCuenta)
+        public static List<Movimiento> LeerMovimientos(string numeroCuenta)
         {
             var movimientos = new List<Movimiento>();
             string archivoMov = $"movimientos_{numeroCuenta}.txt";
