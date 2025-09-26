@@ -1,3 +1,2 @@
-NumeroCuenta;Clave;Saldo
 12345;1234;500000
 67890;5678;250000
