@@ -1,8 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CajeroAutomatico
 {
@@ -13,18 +10,42 @@ namespace CajeroAutomatico
         public static List<Usuario> LeerUsuarios()
         {
             var usuarios = new List<Usuario>();
-            if (File.Exists(usuariosFile))
+            
+            // Buscar el archivo en múltiples ubicaciones
+            string[] posiblesRutas = {
+                usuariosFile,
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, usuariosFile),
+                Path.Combine(Directory.GetCurrentDirectory(), usuariosFile)
+            };
+            
+            string archivoEncontrado = null;
+            foreach (var ruta in posiblesRutas)
             {
-                var lineas = File.ReadAllLines(usuariosFile);
+                if (File.Exists(ruta))
+                {
+                    archivoEncontrado = ruta;
+                    break;
+                }
+            }
+            
+            if (archivoEncontrado != null)
+            {
+                var lineas = File.ReadAllLines(archivoEncontrado);
                 foreach (var linea in lineas)
                 {
-                    var datos = linea.Split(';');
-                    usuarios.Add(new Usuario
+                    if (!string.IsNullOrWhiteSpace(linea))
                     {
-                        NumeroCuenta = datos[0],
-                        Clave = datos[1],
-                        Saldo = decimal.Parse(datos[2])
-                    });
+                        var datos = linea.Split(';');
+                        if (datos.Length >= 3)
+                        {
+                            usuarios.Add(new Usuario
+                            {
+                                NumeroCuenta = datos[0],
+                                Clave = datos[1],
+                                Saldo = decimal.Parse(datos[2])
+                            });
+                        }
+                    }
                 }
             }
             return usuarios;
